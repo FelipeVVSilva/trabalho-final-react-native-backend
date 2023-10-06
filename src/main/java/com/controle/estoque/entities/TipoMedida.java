@@ -3,6 +3,8 @@ package com.controle.estoque.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class TipoMedida {
 	private String medida;
 	
 	@OneToMany(mappedBy = "medida")
+	@JsonIgnore
 	private List<Produto> produtos = new ArrayList<>();
 	public TipoMedida() {
 		super();

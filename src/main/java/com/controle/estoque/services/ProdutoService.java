@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.controle.estoque.entities.Produto;
 import com.controle.estoque.repositories.ProdutoRepository;
 import com.controle.estoque.services.exceptions.CodigoExistenteException;
+import com.controle.estoque.services.exceptions.ProdutoInexistenteException;
 
 @Service
 public class ProdutoService {
@@ -21,6 +22,12 @@ public class ProdutoService {
 	
 	public Produto findByCodigo(String codigo) {
 		Produto produto = repo.findByCodigo(codigo);
+		if(produto != null) {
+			return produto;
+		}
+		else {
+			throw new ProdutoInexistenteException("O código digitado não existe.");
+		}
 	}
 	
 	public Produto insertProduto(Produto produto) {

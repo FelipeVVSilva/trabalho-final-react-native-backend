@@ -8,4 +8,6 @@ import com.controle.estoque.entities.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
+	Produto findByCodigo(String codigo);
+	
 }

@@ -1,5 +1,7 @@
 package com.controle.estoque.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,12 +10,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Produto {
-
+public class Produto implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Long codigo;
+	private String codigo;
 	private String name;
 	private Integer quantidade;
 	
@@ -25,7 +28,7 @@ public class Produto {
 		super();
 		
 	}
-	public Produto(Long id, Long codigo, String name, Integer quantidade, TipoMedida medida) {
+	public Produto(Long id, String codigo,String name, Integer quantidade, TipoMedida medida) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -40,10 +43,10 @@ public class Produto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(Long codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	public String getName() {

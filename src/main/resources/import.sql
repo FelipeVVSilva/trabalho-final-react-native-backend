@@ -1,0 +1,1 @@
+INSERT INTO TIPO_MEDIDA(id, medida) Values (1, 'Quilograma')

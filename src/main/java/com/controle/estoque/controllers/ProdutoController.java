@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,9 +31,15 @@ public class ProdutoController {
 		return ResponseEntity.ok(produtos);
 	}
 	
-	@GetMapping("/{codigo}")
+	@GetMapping("/codigo/{codigo}")
 	public ResponseEntity<Produto> findByCodigo(@PathVariable String codigo){
 		Produto produto = service.findByCodigo(codigo);
+		return ResponseEntity.ok().body(produto);
+	}
+	
+	@GetMapping("/nome/{name}")
+	public ResponseEntity<Produto> findByName(@PathVariable String name){
+		Produto produto = service.findByName(name);
 		return ResponseEntity.ok().body(produto);
 	}
 	
@@ -41,5 +49,17 @@ public class ProdutoController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(produto.getId()).toUri();
 		return ResponseEntity.created(uri).body(produto);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody Produto produto){
+		produto = service.updateProduto(id, produto);
+		return ResponseEntity.ok().body(produto);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteProduto(@PathVariable Long id){
+		service.deleteProduto(id);
+		return ResponseEntity.noContent().build();
 	}
 }

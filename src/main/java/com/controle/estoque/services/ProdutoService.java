@@ -1,6 +1,7 @@
 package com.controle.estoque.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,37 @@ public class ProdutoService {
 		}
 	}
 	
+	public Produto findByName(String name) {
+		Produto produto = repo.findByName(name);
+		if(produto != null) {
+			return produto;
+		}
+		else {
+			throw new ProdutoInexistenteException("O nome digitado não existe.");
+		}
+	}
+	
 	public Produto insertProduto(Produto produto) {
 		validaProduto(produto.getCodigo());
 		Produto savedProduto = repo.save(produto);
 		return savedProduto;
+	}
+	
+	public Produto updateProduto(Long id, Produto produto) {
+		Optional<Produto> p = repo.findById(id);
+		Produto novoProduto = p.get();
+		
+		novoProduto.setName(produto.getName());
+		novoProduto.setQuantidade(produto.getQuantidade());
+		novoProduto.setMedida(produto.getMedida());
+		
+		novoProduto = repo.save(novoProduto);
+		
+		return novoProduto;
+	}
+	
+	public void deleteProduto(Long id) {
+			repo.deleteById(id);
 	}
 	
 	private void validaProduto(String codigo) {

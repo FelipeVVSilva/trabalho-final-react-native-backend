@@ -19,6 +19,7 @@ public class Produto implements Serializable{
 	private String codigo;
 	private String name;
 	private Integer quantidade;
+	private Double preco;
 	
 	@ManyToOne
 	@JoinColumn(name = "medida_id")
@@ -28,15 +29,16 @@ public class Produto implements Serializable{
 		super();
 		
 	}
-	public Produto(Long id, String codigo,String name, Integer quantidade, TipoMedida medida) {
+	public Produto(Long id, String codigo, String name, Integer quantidade, Double preco, TipoMedida medida) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.name = name;
 		this.quantidade = quantidade;
+		this.preco = preco;
 		this.medida = medida;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -66,5 +68,11 @@ public class Produto implements Serializable{
 	}
 	public void setMedida(TipoMedida medida) {
 		this.medida = medida;
+	}
+	public Double getPreco() {
+		return preco;
+	}
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 }

@@ -53,6 +53,7 @@ public class ProdutoService {
 		
 		novoProduto.setName(produto.getName());
 		novoProduto.setQuantidade(produto.getQuantidade());
+		novoProduto.setPreco(produto.getPreco());
 		novoProduto.setMedida(produto.getMedida());
 		
 		novoProduto = repo.save(novoProduto);

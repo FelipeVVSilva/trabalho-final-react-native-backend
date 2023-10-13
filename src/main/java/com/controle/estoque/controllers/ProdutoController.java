@@ -38,9 +38,9 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/nome/{name}")
-	public ResponseEntity<Produto> findByName(@PathVariable String name){
-		Produto produto = service.findByName(name);
-		return ResponseEntity.ok().body(produto);
+	public ResponseEntity<List<Produto>> findByName(@PathVariable String name){
+		List<Produto> produtos = service.findByName(name);
+		return ResponseEntity.ok().body(produtos);
 	}
 	
 	@PostMapping

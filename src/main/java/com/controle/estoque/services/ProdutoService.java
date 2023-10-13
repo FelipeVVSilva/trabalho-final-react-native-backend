@@ -27,17 +27,17 @@ public class ProdutoService {
 			return produto;
 		}
 		else {
-			throw new ProdutoInexistenteException("O código digitado não existe.");
+			throw new ProdutoInexistenteException("O código digitado não existe. Por favor digite um código válido");
 		}
 	}
 	
-	public Produto findByName(String name) {
-		Produto produto = repo.findByName(name);
-		if(produto != null) {
-			return produto;
+	public List<Produto> findByName(String name) {
+		List<Produto> produtos = repo.findByName(name);
+		if(produtos != null) {
+			return produtos;
 		}
 		else {
-			throw new ProdutoInexistenteException("O nome digitado não existe.");
+			throw new ProdutoInexistenteException("O nome digitado não existe. Por favor digite um nome válido");
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class ProdutoService {
 	private void validaProduto(String codigo) {
 		Produto prodValidacao = repo.findByCodigo(codigo);
 		if(prodValidacao != null) {
-			throw new CodigoExistenteException("O código informado já existe!");
+			throw new CodigoExistenteException("O código informado já existe! Por favor digite um código diferente");
 		}
 	}
 }

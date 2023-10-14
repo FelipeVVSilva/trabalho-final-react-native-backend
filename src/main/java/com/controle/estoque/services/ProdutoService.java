@@ -1,5 +1,6 @@
 package com.controle.estoque.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class ProdutoService {
 	
 	public List<Produto> findByName(String name) {
 		List<Produto> produtos = repo.findByName(name);
-		if(produtos != null) {
+		if(!produtos.isEmpty()) {
 			return produtos;
 		}
 		else {

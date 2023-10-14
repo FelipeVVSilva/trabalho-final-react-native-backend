@@ -47,7 +47,7 @@ public class ControllerExceptionHandler {
 	}
 	
 	@ExceptionHandler(ClienteInexistenteException.class)
-	public ResponseEntity<StandardError> clienteExistente(ClienteInexistenteException e, HttpServletRequest request){
+	public ResponseEntity<StandardError> clienteInexistente(ClienteInexistenteException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError(Instant.now(), status.value(), "E-mail digitado não existe!", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
